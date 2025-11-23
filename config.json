@@ -3,8 +3,8 @@
   "maxLines": 10000,
   "recycleLines": 2000,
   "styleRules": [
-  { "pattern": "caught|catch", "style": "{bold}{light-red-fg}" },
-    { "pattern": "error", "style": "{bold}{red-fg}" },
-  { "pattern": "RuleLogText", "style": "{bold}{light-cyan-fg}" }
+    { "pattern": "caught|catch",  "style": "{bold}{light-red-fg}" },
+    { "pattern": "error",         "style": "{bold}{red-fg}" },
+    { "pattern": "RuleLogText",   "style": "{bold}{light-cyan-fg}" }
   ]
 }

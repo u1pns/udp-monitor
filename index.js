@@ -11,6 +11,7 @@ const dgram = require('dgram');
 const fs = require('fs');
 const path = require('path');
 
+// Global state variables
 
 let allMessages = []; // Stores every message to allow dynamic filtering
 let userConfig = {};
@@ -39,6 +40,7 @@ const defaultConfig = {
     ]
 };
 
+// Load user configuration from config.json if available
 const configPath = path.join(__dirname, 'config.json');
 try {
     if (fs.existsSync(configPath)) {
@@ -47,10 +49,11 @@ try {
             userConfig = JSON.parse(raw);
         }
     }
-} catch (error) {
+ } catch (error) {
     console.error('Could not read config.json, using defaults:', error);
 }
 
+// Set style rules and other configurations
 const STYLE_RULES = Array.isArray(userConfig.styleRules) && userConfig.styleRules.length
     ? userConfig.styleRules
     : defaultConfig.styleRules;
@@ -78,17 +81,9 @@ const logBox = blessed.box({
     scrollable: true,
     alwaysScroll: true,
     tags: true,
-    border: {
-        type: 'line'
-    },
-    style: {
-        fg: 'white',
-        bg: 'black',
-        border: {
-            fg: '#f0f0f0'
-        }
-    }
-});
+    border: { type: 'line'},
+    style: { fg: 'white', bg: 'black', border: { fg: '#f0f0f0' }}
+    });
 
 // Status bar showing active filters and the custom status panel
 const filterBox = blessed.box({
@@ -98,13 +93,7 @@ const filterBox = blessed.box({
     height: filterBoxHeight, // Fixed height
     content: '-',
     tags: true,
-    style: {
-        fg: 'yellow',
-        bg: 'black',
-        border: {
-            fg: '#f0f0f0'
-        }
-    }
+    style: { fg: 'white', bg: 'black', border: { fg: '#f0f0f0' }}
 });
 
 // Bottom bar listing the available keyboard shortcuts
@@ -114,10 +103,7 @@ const footer = blessed.box({
     width: '100%',
     height: footerHeight, // Fixed height
     content: 'Ctrl+C to exit | F to filter | H to highlight | R for reset',
-    style: {
-        fg: 'white',
-        bg: 'blue'
-    }
+    style: {  fg: 'white', bg: 'blue' }
 });
 
 // Append all UI elements to the screen
@@ -228,15 +214,10 @@ screen.key(['f'], () => {
         tags: true,
         keys: true,
         vi: true,
-        style: {
-            fg: 'white',
-            bg: 'black',
-            border: {
-                fg: '#f0f0f0'
-            }
-        }
+        style: { fg: 'white', bg: 'black', border: { fg: '#f0f0f0' }}    
     });
 
+    // Prompt user for filter expression
     promptBox.readInput(
         `Enter expression to filter ${currentFilter ? `(current: ${currentFilter})` : ''}: `,
         '',
@@ -247,10 +228,11 @@ screen.key(['f'], () => {
             applyFilter();
         }
     );
-
+    // Render the prompt box
     screen.render();
 });
 
+// Highlight key binding
 screen.key(['h'], () => {
     const promptBox = blessed.prompt({
         parent: screen,
@@ -263,15 +245,10 @@ screen.key(['h'], () => {
         tags: true,
         keys: true,
         vi: true,
-        style: {
-            fg: 'white',
-            bg: 'black',
-            border: {
-                fg: '#f0f0f0'
-            }
-        }
+        style: { fg: 'white', bg: 'black', border: { fg: '#f0f0f0' }}    
     });
 
+    // Prompt user for highlight expression
     promptBox.readInput(
         `Enter expression to highlight ${currentHighlight ? `(current: ${currentHighlight})` : ''}: `,
         '',
@@ -282,10 +259,11 @@ screen.key(['h'], () => {
             applyFilter();
         }
     );
-
+    // Render the prompt box
     screen.render();
 });
 
+// Reset key binding
 screen.key(['r'], () => {
     allMessages = [];
     currentFilter = null;

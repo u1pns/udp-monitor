@@ -12,7 +12,7 @@ Web applications, desktop apps, microcontroller firmware—sooner or later you n
 
 - 🔌 **UDP Listener**: Captures amd displays UDP messages
 - 🔍 **Dynamic Filtering**: Filter logs with regular expressions
-- 🎨 **Text Highlighting**: Emphasize important lines with colors
+- 🎨 **Text Highlighting**: Emphasize important lines with colors (config.json)
 - ⚠️ **Automatic Error Detection**: Highlights error lines in red
 - 📊 **Custom Status Panel**: Visual buttons driven by `customize.js`
 - 🔄 **Smart Auto-Scroll**: Auto-scroll pauses while you navigate manually
@@ -88,7 +88,7 @@ The screen is divided into three sections:
 └─────────────────────────────────────┘
 ┌─────────────────────────────────────┐
 │ Filter: active | Highlight: active  │ <- Status bar
-│ AutoScroll: 15 sec | [ACTIVE] ...   │
+│ AutoScroll: 15 sec | [STATUS] ...   │
 └─────────────────────────────────────┘
   Ctrl+C to exit | F to filter | ...     <- Footer/help bar
 ```
@@ -115,7 +115,7 @@ The system applies predefined style rules:
 
 - **Critical Errors**: Words `caught` or `catch` → **Bright red (bold)**
 - **Errors**: Word `error` → **Intense red**
-- **Rule Logs**: Word `RuleLogText` → **Bright cyan (bold)**
+- **Rule Logs**: (sample) Word `RuleLogText` → **Bright cyan (bold)**
 
 These rules live in the `STYLE_RULES` constant inside `index.js`.
 
