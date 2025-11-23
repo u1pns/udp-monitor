@@ -1,0 +1,5 @@
+#!/bin/bash
+# Use this launcher to run UDPMonitor on macOS or Linux terminals.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+node "$SCRIPT_DIR/index.js"
