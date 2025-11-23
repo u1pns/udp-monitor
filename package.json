@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "node test/test-sender.js"
+    "test": "node test/test-sender.js",
+    "test:integration": "node test/integration-test.js",
+    "demo": "node demo.js"
   },
   "keywords": [
     "udp",
