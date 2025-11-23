@@ -4,9 +4,9 @@ Cross-platform UDP monitor for debugging with an interactive terminal UI.
 
 ## Description
 
-UDP Monitor listens for UDP messages on UDP port (7777 by default) and displays them in an interactive terminal interface. It works on Windows, macOS, and Linux, offering advanced filtering, highlighting, error detection, and a pluggable status panel you can tailor to your own protocol.
+UDP Monitor listens for UDP messages and displays them in an interactive terminal interface. Base on Nodejs, it works on Windows, macOS, and Linux, offering advanced filtering, highlighting, error detection, and a pluggable status panel you can tailor to your own protocol.
 
-Web applications, desktop apps, microcontroller firmware—sooner or later you need real-time insight into what they’re doing. Fire off UDP debug packets (port 7777 by default) from any of those targets and instantly see what’s happening inside. Launch this monitor on Windows, macOS, or Linux to visualize your UDP messages the moment they’re emitted.
+Web applications, desktop apps, microcontroller firmware—sooner or later you need real-time insight into what they’re doing. Fire off UDP debug packets (port 7777 by default) from any of those targets and instantly see what’s happening inside. Launch this monitor to visualize your UDP messages the moment they’re emitted.
 
 ## Features
 
