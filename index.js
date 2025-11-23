@@ -232,7 +232,7 @@ class UDPMonitor {
   }
 
   displayMessage(message) {
-    const timestamp = message.timestamp.toISOString().substr(11, 12);
+    const timestamp = message.timestamp.toISOString().substring(11, 23);
     const source = message.source.padEnd(21);
     
     let coloredContent = this.highlighter.highlight(message.content);
@@ -245,7 +245,7 @@ class UDPMonitor {
   }
 
   logMessage(message, type = 'info') {
-    const timestamp = new Date().toISOString().substr(11, 12);
+    const timestamp = new Date().toISOString().substring(11, 23);
     let color = 'white';
     
     switch (type) {
