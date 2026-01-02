@@ -22,7 +22,7 @@ function createCustomStatus(paintButton) {
     function detectStatus(line) {
         try {
             const logLine = `${line}`;
-            const regex = /\[.-(\d{3,6})\]/;
+            const regex = /\[.*-(\d{3,6})\]/;
             const match = logLine.match(regex);
 
             if (match) {

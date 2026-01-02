@@ -58,6 +58,12 @@ const STYLE_RULES = Array.isArray(userConfig.styleRules) && userConfig.styleRule
     ? userConfig.styleRules
     : defaultConfig.styleRules;
 
+// Pre-compile Regex objects to avoid performance issues in the render loop
+const COMPILED_STYLE_RULES = STYLE_RULES.map(rule => ({
+    ...rule,
+    regex: new RegExp(rule.pattern, 'i')
+}));
+
 const PORT = userConfig.port ?? defaultConfig.port;
 const MAX_LINES = userConfig.maxLines ?? defaultConfig.maxLines; // Maximum number of log lines kept in memory
 const RECYCLE_LINES = userConfig.recycleLines ?? defaultConfig.recycleLines; // Number of lines removed when recycling
@@ -179,16 +185,17 @@ const applyFilter = () => {
     const regexHighlight = currentHighlight ? new RegExp(currentHighlight, 'i') : null;
     
     const styledMessages = messagesToDisplay.map(msg => {
-        // Check predefined style rules first
-        for (const rule of STYLE_RULES) {
-            if (new RegExp(rule.pattern, 'i').test(msg)) {
-                return `${rule.style}${msg}{/}`;
-            }
+        // Priority 1: User-defined Highlight (Yellow)
+        // If the user is searching for something, it should pop out even if it's an error.
+        if (regexHighlight && regexHighlight.test(msg)) {
+            return `{bold}{yellow-fg}${msg}{/yellow-fg}{/bold}`;
         }
 
-        if (regexHighlight && regexHighlight.test(msg)) {
-            // Apply highlight styling
-            return `{bold}{yellow-fg}${msg}{/yellow-fg}{/bold}`;
+        // Priority 2: Predefined Style Rules
+        for (const rule of COMPILED_STYLE_RULES) {
+            if (rule.regex.test(msg)) {
+                return `${rule.style}${msg}{/}`;
+            }
         }
 
         return msg;
